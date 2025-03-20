@@ -9,6 +9,7 @@ on:
   pull_request: # run on pr's against master
     branches:
       - master
+  workflow_dispatch:
 
 env:
   default-python: "3.10"
