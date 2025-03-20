@@ -838,16 +838,18 @@ class XMLConverter(PDFConverter[AnyIO]):
             elif isinstance(item, LTImage):
                 objid = ""
                 if item.stream is not None and item.stream.objid is not None:
-                  objid = item.stream.objid
+                    objid = str(item.stream.objid)
                 if self.imagewriter is not None:
                     name = self.imagewriter.export_image(item)
-                    self.write('<image objid="%d" src="%s" width="%d" height="%d" />\n' %
-                                    (objid, enc(name), item.width, item.height),
-                                    )
+                    self.write(
+                        '<image objid="%s" src="%s" width="%d" height="%d" />\n'
+                        % (objid, enc(name), item.width, item.height),
+                    )
                 else:
-                    self.write('<image objid="%d" width="%d" height="%d" />\n' %
-                                    (objid, item.width, item.height),
-                              )
+                    self.write(
+                        '<image objid="%s" width="%d" height="%d" />\n'
+                        % (objid, item.width, item.height),
+                    )
             else:
                 assert False, str(("Unhandled", item))
 
